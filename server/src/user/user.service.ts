@@ -18,12 +18,14 @@ export class UserService {
          where: {
             isDeleted: 0,
             id: userDto.id
-         }
+         },
+         relations: ["income", "geographic"]
       })
       else return this.userRepository.find({
          where: {
             isDeleted: 0
-         }
+         },
+         relations: ["income", "geographic"]
       })
    }
 
