@@ -27,7 +27,7 @@ import { GeographicModule } from './geographic/geographic.module';
       entities: [User, Income, Geographic],
       synchronize: false,
     }), UserModule, MainModule, IncomeModule, GeographicModule],
-  controllers: [MainController, AppController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule { }
