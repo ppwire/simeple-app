@@ -1,15 +1,13 @@
-import { Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Column, Timestamp } from "typeorm";
 
 export class System {
+
+   @Column({ type: "timestamp" })
+   createdDate: Date;
+
+   @Column({ type: "timestamp" })
+   updatedDate: Date;
+
    @Column()
-   createBy: string;
-
-   @CreateDateColumn()
-   createDate: Date;
-
-   @Column()
-   updateBy: string;
-
-   @UpdateDateColumn()
-   updateDate: Date;
+   isDeleted: Boolean;
 }

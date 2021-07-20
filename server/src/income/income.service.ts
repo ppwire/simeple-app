@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Income } from 'src/entity/income.entity';
 import { Repository } from 'typeorm';
-import { IncomeDto } from './dto/incomeDto';
+import { IncomeDto } from '../dto/income.dto';
 
 @Injectable()
 export class IncomeService {
@@ -11,18 +11,27 @@ export class IncomeService {
       private incomeRepository: Repository<Income>
    ) { }
 
-   findAll(): Promise<Income[]> {
-      return this.incomeRepository.find()
+   find(incomeDto: IncomeDto): Promise<Income[] | Income> {
+      if (incomeDto.id) return this.incomeRepository.findOne({
+         where: {
+            id: incomeDto.id,
+            isDeleted: 0
+         }
+      })
+      else return this.incomeRepository.find({
+         where: {
+            isDeleted: 0
+         }
+      })
    }
 
-   async create(incomeDto: IncomeDto): Promise<Income> {
+   create(incomeDto: IncomeDto): Promise<Income> {
       const incomeEntity = this.incomeRepository.create({
          incomeName: incomeDto.incomeName,
          incomeMin: incomeDto.incomeMin,
          incomeMax: incomeDto.incomeMax,
-         createBy: incomeDto.createBy,
-         updateBy:incomeDto.createBy
+         incomeSeq: incomeDto.incomeSeq
       })
-      return await this.incomeRepository.save(incomeEntity)
+      return this.incomeRepository.save(incomeEntity)
    }
 }

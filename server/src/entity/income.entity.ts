@@ -7,11 +7,14 @@ export class Income extends System {
    id: number;
 
    @Column()
-   IncomeName: string;
+   incomeName: string;
 
    @Column()
    incomeMin: number;
 
    @Column()
    incomeMax: number;
+
+   @Column()
+   incomeSeq: number;
 }
