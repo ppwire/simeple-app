@@ -1,10 +1,10 @@
 <template>
-  <div class="flex flex-col bg-main-blue p-8 rounded-xl max-w-md mx-auto">
+  <div class="form-card">
     <h3 class="text-white font-medium">User Name</h3>
     <input
       type="text"
       name="userName"
-      class="mb-4 rounded-lg border-8 border-opacity-0"
+      class="input-text-field"
       maxlength="20"
       v-model="userName"
     />
@@ -12,11 +12,11 @@
     <input
       type="text"
       name="password"
-      class="mb-4 rounded-lg border-8 border-opacity-0"
+      class="input-text-field"
       maxlength="20"
       v-model="password"
     />
-    <button class="bg-white text-main-blue rounded-lg p-2 my-2">
+    <button class="form-btn">
       <span class="font-bold"> SIGN IN </span>
     </button>
     <p class="text-white cursor-pointer" @click="registerLink(`/register`)">
@@ -39,4 +39,7 @@ export default {
   },
 };
 </script>
+
+<style >
+</style>
 
