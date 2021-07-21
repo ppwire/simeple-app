@@ -11,6 +11,17 @@ export default createStore({
       userName: '',
       password: '',
       confirmPassword: '',
+    },
+    information: {
+      address: '',
+      geographic: '',
+      income: '',
+      gender: '',
+      profilePic: '',
+      subDistrict: '',
+      distirct: '',
+      province: '',
+      zipCode: ''
     }
   },
   mutations: {

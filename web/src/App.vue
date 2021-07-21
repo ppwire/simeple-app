@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <router-view />
+  <div class="flex flex-wrap justify-center content-center" id="app">
+    <router-view/>
   </div>
 </template>
 
@@ -18,12 +18,25 @@ button:focus {
   outline: none;
 }
 
+body, html {
+  height: 100%;
+  width: 100%;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+.input-text {
+  @apply text-white font-medium;
+}
+
 .input-text-field {
   @apply mb-4 rounded-lg border-8 border-opacity-0;
 }
 
 .form-card {
-  @apply flex flex-col bg-main-blue p-8 rounded-xl mx-auto max-w-md;
+  @apply flex flex-col bg-main-blue p-8 rounded-xl;
 }
 
 .form-btn {

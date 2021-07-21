@@ -1,6 +1,6 @@
 <template>
   <div class="form-card">
-    <h3 class="text-white font-medium">User Name</h3>
+    <h3 class="input-text">User Name</h3>
     <input
       type="text"
       name="userName"
@@ -8,7 +8,7 @@
       maxlength="20"
       v-model="userName"
     />
-    <h3 class="text-white font-medium">Password</h3>
+    <h3 class="input-text">Password</h3>
     <input
       type="text"
       name="password"
@@ -29,13 +29,13 @@
 import { mapFields } from "vuex-map-fields";
 import router from "../router";
 export default {
-  computed: {
-    ...mapFields(["signIn.userName", "signIn.password"]),
-  },
   methods: {
     registerLink() {
       router.push({ name: "Register" });
     },
+  },
+  computed: {
+    ...mapFields(["signIn.userName", "signIn.password"]),
   },
 };
 </script>

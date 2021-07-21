@@ -2,7 +2,7 @@
   <div class="form-card">
     <h2 class="text-white text-2xl mb-4 font-bold">Register</h2>
 
-    <h3 class="text-white font-medium">User Name</h3>
+    <h3 class="input-text">User Name</h3>
     <input
       type="text"
       name="userName"
@@ -10,7 +10,7 @@
       maxlength="20"
       v-model="userName"
     />
-    <h3 class="text-white font-medium">Password</h3>
+    <h3 class="input-text">Password</h3>
     <input
       type="text"
       name="password"
@@ -18,7 +18,7 @@
       maxlength="20"
       v-model="password"
     />
-    <h3 class="text-white font-medium">Confirm Password</h3>
+    <h3 class="input-text">Confirm Password</h3>
     <input
       type="text"
       name="comfirmPassword"
@@ -26,7 +26,7 @@
       maxlength="20"
       v-model="confirmPassword"
     />
-    <button class="form-btn">
+    <button class="form-btn" @click="next">
       <span class="font-bold"> NEXT STEP</span>
     </button>
   </div>
@@ -35,6 +35,11 @@
 <script>
 import { mapFields } from "vuex-map-fields";
 export default {
+  methods: {
+    next() {
+      this.$emit("next-step");
+    },
+  },
   computed: {
     ...mapFields([
       "signUp.userName",
