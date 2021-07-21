@@ -11,7 +11,7 @@
         :key="obj.id"
         :value="obj.id"
       >
-        {{ income.incomeName }}
+        {{ obj.incomeName }}
       </option>
     </select>
 
@@ -47,19 +47,11 @@
 
 <script>
 import { mapFields } from "vuex-map-fields";
+import api from "../api/data";
 export default {
   data() {
     return {
-      incomeList: [
-        {
-          id: 0,
-          incomeName: "test",
-        },
-        {
-          id: 1,
-          incomeName: "test2",
-        },
-      ],
+      incomeList: "",
       genderList: [
         {
           id: 0,
@@ -86,6 +78,11 @@ export default {
   },
   computed: {
     ...mapFields(["information.income", "information.gender"]),
+  },
+  beforeMount() {
+    api.getIncome().then((res) => {
+      this.incomeList = res;
+    });
   },
 };
 </script>
