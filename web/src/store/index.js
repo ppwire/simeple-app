@@ -22,7 +22,7 @@ export default createStore({
       distirct: '',
       province: '',
       zipCode: ''
-    }
+    },
   },
   mutations: {
     updateField,

@@ -5,15 +5,18 @@
     @back="back"
     @next-step="nextStep"
   />
+  <ProfileBar @back="back" v-else />
 </template>
 
 <script>
 import SignUpBar from "@/components/SignUpBar.vue";
 import InformationBar from "@/components/InformationBar.vue";
+import ProfileBar from "@/components/ProfileBar.vue";
 export default {
   components: {
     SignUpBar,
     InformationBar,
+    ProfileBar,
   },
   data() {
     return {
