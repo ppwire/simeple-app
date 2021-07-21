@@ -1,28 +1,20 @@
 <template>
-  <Header></Header>
-  <router-view />
+  <div >
+    <router-view />
+  </div>
 </template>
 
 <script>
-import Header from "./components/Header.vue";
-import 'primeflex/primeflex.css';
-
 export default {
-  components:{
-    Header
-  },
-  setup() {
-    
-  },
+  setup() {},
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
 }
 </style>
