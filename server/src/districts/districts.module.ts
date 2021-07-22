@@ -7,6 +7,6 @@ import { DistrictsService } from './districts.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Districts])],
   controllers: [DistrictsController],
-  providers: [DistrictsService]
+  providers: [DistrictsService],
 })
-export class DistrictsModule { }
+export class DistrictsModule {}

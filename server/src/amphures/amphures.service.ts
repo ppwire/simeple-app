@@ -5,16 +5,16 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class AmphuresService {
-   constructor(
-      @InjectRepository(Amphures)
-      private amphuresRepository: Repository<Amphures>
-   ) { }
+  constructor(
+    @InjectRepository(Amphures)
+    private amphuresRepository: Repository<Amphures>,
+  ) {}
 
-   findById(id: number): Promise<Amphures[]> {
-      return this.amphuresRepository.find({
-         where: {
-            provinceId: id
-         }
-      })
-   }
+  findById(id: number): Promise<Amphures[]> {
+    return this.amphuresRepository.find({
+      where: {
+        provinceId: id,
+      },
+    });
+  }
 }

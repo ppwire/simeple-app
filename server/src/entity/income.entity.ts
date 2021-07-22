@@ -1,20 +1,20 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { System } from "./system.entity";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { System } from './system.entity';
 
 @Entity()
 export class Income extends System {
-   @PrimaryGeneratedColumn()
-   id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-   @Column()
-   incomeName: string;
+  @Column()
+  incomeName: string;
 
-   @Column()
-   incomeMin: number;
+  @Column()
+  incomeMin: number;
 
-   @Column()
-   incomeMax: number;
+  @Column()
+  incomeMax: number;
 
-   @Column()
-   incomeSeq: number;
+  @Column()
+  incomeSeq: number;
 }

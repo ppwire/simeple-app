@@ -11,58 +11,68 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
-   constructor(
-      @InjectRepository(User)
-      private userRepository: Repository<User>,
-      private mainService: MainService
-   ) { }
+  constructor(
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
+    private mainService: MainService,
+  ) { }
 
-   find(userDto: UserDto): Promise<User[] | User> {
-      if (userDto.id) return this.userRepository.findOne({
-         where: {
-            isDeleted: 0,
-            id: userDto.id
-         },
-         relations: ["income", "provinces", "amphures", "districts"]
-      })
-      else return this.userRepository.find({
-         where: {
-            isDeleted: 0
-         },
-         relations: ["income", "provinces", "amphures", "districts"]
-      })
-   }
+  find(userDto: UserDto): Promise<User[] | User> {
+    if (userDto.id)
+      return this.userRepository.findOne({
+        where: {
+          isDeleted: 0,
+          id: userDto.id,
+        },
+        relations: ['income', 'provinces', 'amphures', 'districts'],
+      });
+    else
+      return this.userRepository.find({
+        where: {
+          isDeleted: 0,
+        },
+        relations: ['income', 'provinces', 'amphures', 'districts'],
+      });
+  }
 
+  findByUserName(userName: string) {
+    return this.userRepository.findOne({
+      where: {
+        isDeleted: 0,
+        userName: userName,
+      },
+    });
+  }
 
-   async create(userDto: UserDto): Promise<User> {
-      const user = new User()
-      user.userName = userDto.userName
-      user.address = userDto.address
-      user.gender = userDto.gender
+  async create(userDto: UserDto): Promise<User> {
+    const user = new User();
+    user.userName = userDto.userName;
+    user.address = userDto.address;
+    user.gender = userDto.gender;
 
-      await this.mainService.hash(userDto.userPassword).then(res => {
-         user.userPassword = res
-      })
+    await this.mainService.hash(userDto.userPassword).then((res) => {
+      user.userPassword = res;
+    });
 
-      user.profilePic = userDto.profilePic
+    user.profilePic = userDto.profilePic;
 
-      const income = new Income()
-      income.id = userDto.incomeId
+    const income = new Income();
+    income.id = userDto.incomeId;
 
-      const provinces = new Provinces()
-      provinces.id = userDto.provincesId
+    const provinces = new Provinces();
+    provinces.id = userDto.provincesId;
 
-      const amphures = new Amphures()
-      amphures.id = userDto.amphuresId
+    const amphures = new Amphures();
+    amphures.id = userDto.amphuresId;
 
-      const districts = new Districts()
-      districts.id = userDto.districtsId
+    const districts = new Districts();
+    districts.id = userDto.districtsId;
 
-      user.income = income
-      user.provinces = provinces
-      user.amphures = amphures
-      user.districts = districts
+    user.income = income;
+    user.provinces = provinces;
+    user.amphures = amphures;
+    user.districts = districts;
 
-      return this.userRepository.save(user)
-   }
+    return this.userRepository.save(user);
+  }
 }

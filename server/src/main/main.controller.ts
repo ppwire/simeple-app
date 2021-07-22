@@ -1,12 +1,11 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { IncomeDto } from 'src/dto/income.dto';
-import { IncomeService } from 'src/income/income.service';
+import { UserDto } from 'src/dto/user.dto';
+import { MainService } from './main.service';
 
 @Controller('main')
 export class MainController {
+  constructor(private mainService: MainService) {}
 
-   @Post('/signup')
-   signup() {
-      
-   }
+  @Post('signin')
+  signin(@Body() userDto: UserDto) {}
 }

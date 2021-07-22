@@ -7,6 +7,6 @@ import { AmphuresService } from './amphures.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Amphures])],
   controllers: [AmphuresController],
-  providers: [AmphuresService]
+  providers: [AmphuresService],
 })
-export class AmphuresModule { }
+export class AmphuresModule {}

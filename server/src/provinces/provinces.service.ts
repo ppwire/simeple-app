@@ -5,13 +5,12 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class ProvincesService {
+  constructor(
+    @InjectRepository(Provinces)
+    private provincesRepository: Repository<Provinces>,
+  ) {}
 
-   constructor(
-      @InjectRepository(Provinces)
-      private provincesRepository: Repository<Provinces>
-   ) { }
-
-   find(): Promise<Provinces[]> {
-      return this.provincesRepository.find()
-   }
+  find(): Promise<Provinces[]> {
+    return this.provincesRepository.find();
+  }
 }

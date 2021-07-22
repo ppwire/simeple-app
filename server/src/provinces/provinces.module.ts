@@ -7,6 +7,6 @@ import { ProvincesService } from './provinces.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Provinces])],
   controllers: [ProvincesController],
-  providers: [ProvincesService]
+  providers: [ProvincesService],
 })
-export class ProvincesModule { }
+export class ProvincesModule {}

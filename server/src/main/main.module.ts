@@ -4,9 +4,8 @@ import { MainController } from './main.controller';
 import { MainService } from './main.service';
 
 @Module({
-  imports: [IncomeModule],
   controllers: [MainController],
   providers: [MainService],
-  exports: [MainService]
+  exports: [MainService],
 })
-export class MainModule { }
+export class MainModule {}

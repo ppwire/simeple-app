@@ -14,13 +14,14 @@ import { AmphuresModule } from './amphures/amphures.module';
 import { Amphures } from './entity/amphures.entity';
 import { DistrictsModule } from './districts/districts.module';
 import { Districts } from './entity/districts.entity';
-
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-    }), TypeOrmModule.forRoot({
+    }),
+    TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,
       port: 3306,
@@ -29,8 +30,16 @@ import { Districts } from './entity/districts.entity';
       database: process.env.DB_NAME,
       entities: [User, Income, Provinces, Amphures, Districts],
       synchronize: false,
-    }), UserModule, MainModule, IncomeModule, ProvincesModule, AmphuresModule, DistrictsModule],
+    }),
+    UserModule,
+    MainModule,
+    IncomeModule,
+    ProvincesModule,
+    AmphuresModule,
+    DistrictsModule,
+    AuthModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

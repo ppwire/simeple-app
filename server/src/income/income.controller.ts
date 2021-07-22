@@ -4,22 +4,20 @@ import { IncomeService } from './income.service';
 
 @Controller('income')
 export class IncomeController {
-   constructor(
-      private incomeService: IncomeService
-   ) { }
+  constructor(private incomeService: IncomeService) {}
 
-   @Post()
-   async create(@Body() incomeDto: IncomeDto) {
-      return await this.incomeService.create(incomeDto)
-   }
+  @Post()
+  async create(@Body() incomeDto: IncomeDto) {
+    return await this.incomeService.create(incomeDto);
+  }
 
-   @Get()
-   async get(@Query() incomeDto: IncomeDto) {
-      return await this.incomeService.find(incomeDto)
-   }
+  @Get()
+  async get(@Query() incomeDto: IncomeDto) {
+    return await this.incomeService.find(incomeDto);
+  }
 
-   @Patch()
-   async update(@Body() incomeDto: IncomeDto) {
-      return await this.incomeService.update(incomeDto)
-   }
+  @Patch()
+  async update(@Body() incomeDto: IncomeDto) {
+    return await this.incomeService.update(incomeDto);
+  }
 }
