@@ -16,11 +16,17 @@ export class IncomeService {
          where: {
             id: incomeDto.id,
             isDeleted: 0
+         },
+         order: {
+            incomeSeq: 'ASC'
          }
       })
       else return this.incomeRepository.find({
          where: {
             isDeleted: 0
+         },
+         order: {
+            incomeSeq: 'ASC'
          }
       })
    }

@@ -25,7 +25,7 @@ import { GeographicModule } from './geographic/geographic.module';
       password: process.env.DB_PW,
       database: process.env.DB_NAME,
       entities: [User, Income, Geographic],
-      synchronize: false,
+      synchronize: true,
     }), UserModule, MainModule, IncomeModule, GeographicModule],
   controllers: [AppController],
   providers: [AppService],
