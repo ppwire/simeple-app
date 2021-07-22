@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-wrap justify-center content-center" id="app">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -18,7 +18,8 @@ button:focus {
   outline: none;
 }
 
-body, html {
+body,
+html {
   height: 100%;
   width: 100%;
 }
@@ -40,6 +41,6 @@ body, html {
 }
 
 .form-btn {
-  @apply bg-white text-main-blue rounded-lg p-2 my-2;
+  @apply bg-white text-main-blue rounded-lg p-2 my-2 mt-5;
 }
 </style>

@@ -15,11 +15,11 @@ export default createStore({
     information: {
       address: '',
       geographic: '',
-      income: '',
-      gender: '',
+      income: null,
+      gender: null,
       profilePic: '',
       subDistrict: '',
-      distirct: '',
+      district: '',
       province: '',
       zipCode: ''
     },

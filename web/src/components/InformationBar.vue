@@ -1,38 +1,34 @@
 <template>
   <div class="form-card">
     <h3 class="input-text">Address</h3>
-    <input class="input-text-field" type="text" />
+    <InputText v-model="address"></InputText>
 
     <h3 class="input-text">Income</h3>
-    <select class="input-text-field" v-model="income">
-      <option
-        class="rounded-lg"
-        v-for="obj in incomeList"
-        :key="obj.id"
-        :value="obj.id"
-      >
-        {{ obj.incomeName }}
-      </option>
-    </select>
-
+    <Dropdown
+      v-model="income"
+      :options="incomeList"
+      optionLabel="incomeName"
+      placeholder="Select an Income"
+    />
     <h3 class="input-text">Gender</h3>
-    <select class="input-text-field" v-model="gender">
-      <option v-for="obj in genderList" :key="obj.id">
-        {{ obj.value }}
-      </option>
-    </select>
-
-    <h3 class="input-text">Sub District</h3>
-    <select class="input-text-field"></select>
-
-    <h3 class="input-text">District</h3>
-    <select class="input-text-field"></select>
+    <Dropdown
+      v-model="gender"
+      :options="genderList"
+      optionLabel="value"
+      placeholder="Select a Gender"
+    ></Dropdown>
 
     <h3 class="input-text">Province</h3>
-    <select class="input-text-field"></select>
+    <InputText v-model="province" type="text"></InputText>
+
+    <h3 class="input-text">District</h3>
+    <InputText v-model="district" type="text"></InputText>
+
+    <h3 class="input-text">Sub District</h3>
+    <InputText v-model="subDistrict" type="text"></InputText>
 
     <h3 class="input-text">Zip Code</h3>
-    <select class="input-text-field"></select>
+    <InputText v-model="zipCode" type="text"></InputText>
 
     <div class="flex flex-row justify-between">
       <button class="form-btn">
@@ -51,7 +47,8 @@ import api from "../api/data";
 export default {
   data() {
     return {
-      incomeList: "",
+      incomeList: [],
+      subDistrictList: [],
       genderList: [
         {
           id: 0,
@@ -75,9 +72,19 @@ export default {
     next() {
       this.$emit("next-step");
     },
+    onChange() {},
   },
   computed: {
-    ...mapFields(["information.income", "information.gender"]),
+    ...mapFields([
+      "information.income",
+      "information.gender",
+      "information.address",
+
+      "information.province",
+      "information.district",
+      "information.subDistrict",
+      "information.zipCode",
+    ]),
   },
   beforeMount() {
     api.getIncome().then((res) => {

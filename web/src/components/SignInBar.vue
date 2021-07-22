@@ -1,22 +1,10 @@
 <template>
   <div class="form-card">
     <h3 class="input-text">User Name</h3>
-    <input
-      type="text"
-      name="userName"
-      class="input-text-field"
-      maxlength="20"
-      v-model="userName"
-    />
+    <InputText type="text" v-model="userName" />
     <h3 class="input-text">Password</h3>
-    <input
-      type="text"
-      name="password"
-      class="input-text-field"
-      maxlength="20"
-      v-model="password"
-    />
-    <button class="form-btn">
+    <InputText type="text" v-model="password" />
+    <button class="form-btn ">
       <span class="font-bold"> SIGN IN </span>
     </button>
     <p class="text-white cursor-pointer" @click="registerLink(`/register`)">
