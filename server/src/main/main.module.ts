@@ -7,5 +7,6 @@ import { MainService } from './main.service';
   imports: [IncomeModule],
   controllers: [MainController],
   providers: [MainService],
+  exports: [MainService]
 })
 export class MainModule { }

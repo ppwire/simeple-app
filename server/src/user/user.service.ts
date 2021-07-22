@@ -6,13 +6,15 @@ import { Districts } from 'src/entity/districts.entity';
 import { Income } from 'src/entity/income.entity';
 import { Provinces } from 'src/entity/provinces.entity';
 import { User } from 'src/entity/user.entity';
+import { MainService } from 'src/main/main.service';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
    constructor(
       @InjectRepository(User)
-      private userRepository: Repository<User>
+      private userRepository: Repository<User>,
+      private mainService: MainService
    ) { }
 
    find(userDto: UserDto): Promise<User[] | User> {
@@ -31,12 +33,17 @@ export class UserService {
       })
    }
 
-   create(userDto: UserDto): Promise<User> {
+
+   async create(userDto: UserDto): Promise<User> {
       const user = new User()
       user.userName = userDto.userName
       user.address = userDto.address
       user.gender = userDto.gender
-      user.userPassword = userDto.userPassword
+
+      await this.mainService.hash(userDto.userPassword).then(res => {
+         user.userPassword = res
+      })
+
       user.profilePic = userDto.profilePic
 
       const income = new Income()
