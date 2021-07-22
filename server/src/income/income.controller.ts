@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Patch, Post, Query } from '@nestjs/common';
 import { IncomeDto } from 'src/dto/income.dto';
 import { IncomeService } from './income.service';
 
@@ -18,4 +18,8 @@ export class IncomeController {
       return await this.incomeService.find(incomeDto)
    }
 
+   @Patch()
+   async update(@Body() incomeDto: IncomeDto) {
+      return await this.incomeService.update(incomeDto)
+   }
 }

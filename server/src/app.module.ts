@@ -6,11 +6,8 @@ import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entity/user.entity';
 import { Income } from './entity/income.entity';
-import { MainController } from './main/main.controller';
 import { MainModule } from './main/main.module';
 import { IncomeModule } from './income/income.module';
-import { Geographic } from './entity/geographic.entity';
-import { GeographicModule } from './geographic/geographic.module';
 
 
 @Module({
@@ -24,9 +21,9 @@ import { GeographicModule } from './geographic/geographic.module';
       username: process.env.DB_USER,
       password: process.env.DB_PW,
       database: process.env.DB_NAME,
-      entities: [User, Income, Geographic],
-      synchronize: true,
-    }), UserModule, MainModule, IncomeModule, GeographicModule],
+      entities: [User, Income],
+      synchronize: false,
+    }), UserModule, MainModule, IncomeModule],
   controllers: [AppController],
   providers: [AppService],
 })

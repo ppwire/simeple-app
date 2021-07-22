@@ -1,5 +1,4 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Geographic } from "./geographic.entity";
 import { Income } from "./income.entity";
 import { System } from "./system.entity";
 
@@ -27,7 +26,4 @@ export class User extends System {
    @JoinColumn()
    income: Income
 
-   @OneToOne(() => Geographic)
-   @JoinColumn()
-   geographic: Geographic
 }

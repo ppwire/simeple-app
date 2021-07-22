@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Income } from 'src/entity/income.entity';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { IncomeDto } from '../dto/income.dto';
 
 @Injectable()
@@ -39,5 +39,14 @@ export class IncomeService {
          incomeSeq: incomeDto.incomeSeq
       })
       return this.incomeRepository.save(incomeEntity)
+   }
+
+   update(incomeDto: IncomeDto): Promise<UpdateResult> {
+      return this.incomeRepository.update(incomeDto.id, {
+         incomeName: incomeDto.incomeName,
+         incomeMin: incomeDto.incomeMin,
+         incomeMax: incomeDto.incomeMax,
+         incomeSeq: incomeDto.incomeSeq
+      })
    }
 }
