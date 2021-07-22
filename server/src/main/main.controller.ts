@@ -5,5 +5,8 @@ import { IncomeService } from 'src/income/income.service';
 @Controller('main')
 export class MainController {
 
-  
+   @Post('/signup')
+   signup() {
+      
+   }
 }

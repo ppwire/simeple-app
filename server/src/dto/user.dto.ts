@@ -6,5 +6,7 @@ export class UserDto {
    address: string;
    gender: string
    incomeId: number
-   geographicId: number
+   provincesId: number
+   amphuresId: number
+   districtsId: number
 }
