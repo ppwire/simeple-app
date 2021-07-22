@@ -18,32 +18,41 @@
       placeholder="Select a Gender"
     ></Dropdown>
 
-    <h3 class="input-text">Country</h3>
-    <AutoComplete
-      v-model="country"
-      :suggestions="countryFilterList"
-      @complete="searchCountry($event)"
-      @item-select="getStates"
-      field="name"
-    ></AutoComplete>
-
-    <h3 class="input-text">State</h3>
-    <AutoComplete
-      v-model="state"
-      :suggestions="stateFilterList"
-      @complete="searchState($event)"
-      @item-select="getCitys"
-      field="name"
+    <h3 class="input-text">Province</h3>
+    <Dropdown
+      v-model="province"
+      :options="provinceList"
+      optionLabel="nameEn"
+      placeholder="Select a Province"
+      :filter="true"
+      @change="getDistricts"
     >
-    </AutoComplete>
+    </Dropdown>
 
-    <h3 class="input-text">City</h3>
-    <AutoComplete
-      v-model="city"
-      :suggestions="cityFilterList"
-      @complete="searchCity($event)"
-    ></AutoComplete>
+    <h3 class="input-text">District</h3>
+    <Dropdown
+      v-model="district"
+      :options="districtList"
+      optionLabel="nameEn"
+      placeholder="Select a District"
+      :filter="true"
+      @change="getSubDistricts"
+    >
+    </Dropdown>
 
+    <h3 class="input-text">SubDistrict</h3>
+    <Dropdown
+      v-model="subDistrict"
+      :options="subDistrictList"
+      optionLabel="nameEn"
+      placeholder="Select a Sub District"
+      :filter="true"
+      @change="getZipCode"
+    >
+    </Dropdown>
+
+    <h3 class="input-text">Zip Code</h3>
+    <InputText v-model="zipCode"> </InputText>
     <div class="flex flex-row justify-between">
       <button class="form-btn">
         <span class="font-bold" @click="back"> BACK </span>
@@ -62,24 +71,21 @@ export default {
   data() {
     return {
       incomeList: [],
-      countryList: [],
-      countryFilterList: [],
-      stateList: [],
-      stateFilterList: [],
-      cityList: [],
-      cityFilterList: [],
+      provinceList: [],
+      districtList: [],
+      subDistrictList: [],
       genderList: [
         {
           id: 0,
-          value: "MALE",
+          value: "Male",
         },
         {
           id: 1,
-          value: "FEMALE",
+          value: "Female",
         },
         {
           id: 2,
-          value: "OTHER",
+          value: "Other",
         },
       ],
     };
@@ -91,59 +97,32 @@ export default {
     next() {
       this.$emit("next-step");
     },
-    searchCountry(event) {
-      setTimeout(() => {
-        if (!event.query.trim().length) {
-          this.countryFilterList = [...this.countryList];
-        } else {
-          this.countryFilterList = this.countryList.filter((country) => {
-            return country.name
-              .toLowerCase()
-              .startsWith(event.query.toLowerCase());
-          });
-        }
-      }, 250);
+
+    getZipCode() {
+      this.zipCode = this.subDistrict.zipCode;
     },
 
-    searchState(event) {
-      if (!event.query.trim().length) {
-        this.stateFilterList = [...this.stateList];
-      } else {
-        this.stateFilterList = this.stateList.filter((state) => {
-          return state.name.toLowerCase().startsWith(event.query.toLowerCase());
-        });
-      }
-    },
-
-    searchCity(event) {
-      if (!event.query.trim().length) {
-        this.cityFilterList = [...this.cityList];
-      } else {
-        this.cityFilterList = this.cityList.filter((city) => {
-          return city.toLowerCase().startsWith(event.query.toLowerCase());
-        });
-      }
-    },
-
-    getStates() {
-      this.state = "";
-      this.city = "";
+    getDistricts() {
+      this.district = "";
+      this.subDistrict = "";
+      this.zipCode = "";
       api
-        .getStates(this.country.name)
+        .getDistricts(this.province.id)
         .then((res) => {
-          this.stateList = res.data.states;
+          this.districtList = res;
         })
         .catch((err) => {
           console.log(err);
         });
     },
 
-    getCitys() {
-      this.city = "";
+    getSubDistricts() {
+      this.subDistrict = "";
+      this.zipCode = "";
       api
-        .getCitys(this.country.name, this.state.name)
+        .getSubDistricts(this.district.id)
         .then((res) => {
-          this.cityList = res.data;
+          this.subDistrictList = res;
         })
         .catch((err) => {
           console.log(err);
@@ -156,9 +135,10 @@ export default {
       "information.gender",
       "information.address",
 
-      "information.country",
-      "information.city",
-      "information.state",
+      "information.province",
+      "information.district",
+      "information.subDistrict",
+      "information.zipCode",
     ]),
   },
   beforeMount() {
@@ -172,9 +152,9 @@ export default {
       });
 
     api
-      .getCountrys()
+      .getProvinces()
       .then((res) => {
-        this.countryList = res.data;
+        this.provinceList = res;
       })
       .catch((err) => {
         console.log(err);

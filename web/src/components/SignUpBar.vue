@@ -1,7 +1,6 @@
 <template>
   <div class="form-card">
     <h2 class="text-white text-2xl mb-4 font-bold">Register</h2>
-
     <h3 class="input-text">User Name</h3>
     <InputText type="text" v-model="userName" />
     <h3 class="input-text">Password</h3>

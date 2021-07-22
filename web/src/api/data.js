@@ -1,5 +1,4 @@
 import axiosInstance from './axios-instance'
-import thirdParty from './third-party'
 
 export default {
    getIncomes: () => {
@@ -12,9 +11,9 @@ export default {
       })
    },
 
-   getCountrys: () => {
+   getProvinces: () => {
       return new Promise((reslove, reject) => {
-         thirdParty.get('/countries/capital').then(res => {
+         axiosInstance.get('/provinces').then(res => {
             reslove(res.data)
          }).catch(err => {
             reject(err)
@@ -22,11 +21,9 @@ export default {
       })
    },
 
-   getStates: (country) => {
+   getDistricts: (id) => {
       return new Promise((reslove, reject) => {
-         thirdParty.post('/countries/states', {
-            country: country
-         }).then(res => {
+         axiosInstance.get(`/amphures?id=${id}`).then(res => {
             reslove(res.data)
          }).catch(err => {
             reject(err)
@@ -34,12 +31,9 @@ export default {
       })
    },
 
-   getCitys: (country, state) => {
+   getSubDistricts: (id) => {
       return new Promise((resolve, reject) => {
-         thirdParty.post('/countries/state/cities', {
-            country: country,
-            state: state
-         }).then(res => {
+         axiosInstance.get(`/districts?id=${id}`).then(res => {
             resolve(res.data)
          }).catch(err => {
             reject(err)

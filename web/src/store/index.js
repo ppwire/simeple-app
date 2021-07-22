@@ -17,9 +17,10 @@ export default createStore({
       income: '',
       gender: '',
       profilePic: '',
-      country: '',
-      city: '',
-      state: ''
+      province: '',
+      district: '',
+      subDistrict: '',
+      zipCode: ''
     },
   },
   mutations: {
