@@ -1,12 +1,12 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Provinces {
+export class Districts {
    @PrimaryGeneratedColumn()
    id: number;
 
-   @Column()
-   code: string;
+   @Column({ name: 'zip_code' })
+   zipCode: number;
 
    @Column({ name: "name_th" })
    nameTh: string;

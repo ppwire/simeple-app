@@ -8,6 +8,12 @@ import { User } from './entity/user.entity';
 import { Income } from './entity/income.entity';
 import { MainModule } from './main/main.module';
 import { IncomeModule } from './income/income.module';
+import { ProvincesModule } from './provinces/provinces.module';
+import { Provinces } from './entity/provinces.entity';
+import { AmphuresModule } from './amphures/amphures.module';
+import { Amphures } from './entity/amphures.entity';
+import { DistrictsModule } from './districts/districts.module';
+import { Districts } from './entity/districts.entity';
 
 
 @Module({
@@ -21,9 +27,9 @@ import { IncomeModule } from './income/income.module';
       username: process.env.DB_USER,
       password: process.env.DB_PW,
       database: process.env.DB_NAME,
-      entities: [User, Income],
+      entities: [User, Income, Provinces, Amphures, Districts],
       synchronize: false,
-    }), UserModule, MainModule, IncomeModule],
+    }), UserModule, MainModule, IncomeModule, ProvincesModule, AmphuresModule, DistrictsModule],
   controllers: [AppController],
   providers: [AppService],
 })
