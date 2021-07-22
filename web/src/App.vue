@@ -41,6 +41,6 @@ html {
 }
 
 .form-btn {
-  @apply bg-white text-main-blue rounded-lg p-2 my-2 mt-5;
+  @apply bg-white text-main-blue rounded-lg p-2 my-2 mt-5 font-bold;
 }
 </style>

@@ -14,12 +14,8 @@
 
     <img :src="profilePic" class="object-contain max-h-60 max-w-xl mb-4" />
     <div class="flex flex-row justify-between">
-      <button class="form-btn">
-        <span class="font-bold" @click="back"> BACK </span>
-      </button>
-      <button class="form-btn">
-        <span class="font-bold" @click="submit"> SUBMIT</span>
-      </button>
+      <button class="form-btn" @click="back">BACK</button>
+      <button class="form-btn" @click="submit">SUBMIT</button>
     </div>
   </div>
 </template>

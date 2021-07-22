@@ -1,6 +1,6 @@
 <template>
   <div class="form-card">
-    <h2 class="text-white text-2xl mb-4 font-bold">Register</h2>
+    <h1 class="text-white text-2xl mb-4 font-bold">Sign Up</h1>
 
     <h3 class="input-text">User Name</h3>
     <InputText type="text" v-model="userName" />
@@ -18,12 +18,8 @@
       v$.confirmPassword.$errors[0].$message
     }}</small>
     <div class="flex flex-row justify-between">
-      <button class="form-btn">
-        <span class="font-bold" @click="back"> BACK </span>
-      </button>
-      <button class="form-btn" @click="next">
-        <span class="font-bold"> NEXT STEP</span>
-      </button>
+      <button class="form-btn" @click="back">BACK</button>
+      <button class="form-btn" @click="next">NEXT STEP</button>
     </div>
   </div>
 </template>
