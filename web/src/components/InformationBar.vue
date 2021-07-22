@@ -18,17 +18,31 @@
       placeholder="Select a Gender"
     ></Dropdown>
 
-    <h3 class="input-text">Province</h3>
-    <InputText v-model="province" type="text"></InputText>
+    <h3 class="input-text">Country</h3>
+    <AutoComplete
+      v-model="country"
+      :suggestions="countryFilterList"
+      @complete="searchCountry($event)"
+      @item-select="getStates"
+      field="name"
+    ></AutoComplete>
 
-    <h3 class="input-text">District</h3>
-    <InputText v-model="district" type="text"></InputText>
+    <h3 class="input-text">State</h3>
+    <AutoComplete
+      v-model="state"
+      :suggestions="stateFilterList"
+      @complete="searchState($event)"
+      @item-select="getCitys"
+      field="name"
+    >
+    </AutoComplete>
 
-    <h3 class="input-text">Sub District</h3>
-    <InputText v-model="subDistrict" type="text"></InputText>
-
-    <h3 class="input-text">Zip Code</h3>
-    <InputText v-model="zipCode" type="text"></InputText>
+    <h3 class="input-text">City</h3>
+    <AutoComplete
+      v-model="city"
+      :suggestions="cityFilterList"
+      @complete="searchCity($event)"
+    ></AutoComplete>
 
     <div class="flex flex-row justify-between">
       <button class="form-btn">
@@ -48,7 +62,12 @@ export default {
   data() {
     return {
       incomeList: [],
-      subDistrictList: [],
+      countryList: [],
+      countryFilterList: [],
+      stateList: [],
+      stateFilterList: [],
+      cityList: [],
+      cityFilterList: [],
       genderList: [
         {
           id: 0,
@@ -72,7 +91,64 @@ export default {
     next() {
       this.$emit("next-step");
     },
-    onChange() {},
+    searchCountry(event) {
+      setTimeout(() => {
+        if (!event.query.trim().length) {
+          this.countryFilterList = [...this.countryList];
+        } else {
+          this.countryFilterList = this.countryList.filter((country) => {
+            return country.name
+              .toLowerCase()
+              .startsWith(event.query.toLowerCase());
+          });
+        }
+      }, 250);
+    },
+
+    searchState(event) {
+      if (!event.query.trim().length) {
+        this.stateFilterList = [...this.stateList];
+      } else {
+        this.stateFilterList = this.stateList.filter((state) => {
+          return state.name.toLowerCase().startsWith(event.query.toLowerCase());
+        });
+      }
+    },
+
+    searchCity(event) {
+      if (!event.query.trim().length) {
+        this.cityFilterList = [...this.cityList];
+      } else {
+        this.cityFilterList = this.cityList.filter((city) => {
+          return city.toLowerCase().startsWith(event.query.toLowerCase());
+        });
+      }
+    },
+
+    getStates() {
+      this.state = "";
+      this.city = "";
+      api
+        .getStates(this.country.name)
+        .then((res) => {
+          this.stateList = res.data.states;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    getCitys() {
+      this.city = "";
+      api
+        .getCitys(this.country.name, this.state.name)
+        .then((res) => {
+          this.cityList = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
   computed: {
     ...mapFields([
@@ -80,16 +156,29 @@ export default {
       "information.gender",
       "information.address",
 
-      "information.province",
-      "information.district",
-      "information.subDistrict",
-      "information.zipCode",
+      "information.country",
+      "information.city",
+      "information.state",
     ]),
   },
   beforeMount() {
-    api.getIncome().then((res) => {
-      this.incomeList = res;
-    });
+    api
+      .getIncomes()
+      .then((res) => {
+        this.incomeList = res;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    api
+      .getCountrys()
+      .then((res) => {
+        this.countryList = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>

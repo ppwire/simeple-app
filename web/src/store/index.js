@@ -14,14 +14,12 @@ export default createStore({
     },
     information: {
       address: '',
-      geographic: '',
-      income: null,
-      gender: null,
+      income: '',
+      gender: '',
       profilePic: '',
-      subDistrict: '',
-      district: '',
-      province: '',
-      zipCode: ''
+      country: '',
+      city: '',
+      state: ''
     },
   },
   mutations: {
