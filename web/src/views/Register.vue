@@ -9,7 +9,7 @@
     @back="back"
     @next-step="nextStep"
   />
-  <ProfileBar @back="back" v-else />
+  <ProfileBar @back="back" @next-step="submit" v-else />
 </template>
 
 <script>
@@ -17,6 +17,7 @@ import SignUpBar from "@/components/SignUpBar.vue";
 import InformationBar from "@/components/InformationBar.vue";
 import ProfileBar from "@/components/ProfileBar.vue";
 import router from "../router";
+
 export default {
   components: {
     SignUpBar,
@@ -35,9 +36,18 @@ export default {
     back() {
       this.signUpState--;
     },
-
     nextStep() {
       this.signUpState++;
+    },
+    submit() {
+      this.$store
+        .dispatch("userSignUp")
+        .then(() => {
+          router.push({ name: "Complete" });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };

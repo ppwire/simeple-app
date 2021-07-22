@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
 import { getField, updateField } from 'vuex-map-fields'
+import userApi from '../api/user'
 
 export default createStore({
   state: {
@@ -29,6 +30,10 @@ export default createStore({
   getters: {
     getField,
   },
-  actions: {},
+  actions: {
+    userSignUp() {
+      return userApi.userSignUp(this.state.signUp, this.state.information)
+    }
+  },
   modules: {},
 });

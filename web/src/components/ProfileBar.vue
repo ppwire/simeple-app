@@ -16,6 +16,8 @@
     <div class="flex flex-row justify-between">
       <button class="form-btn" @click="back">BACK</button>
       <button class="form-btn" @click="submit">SUBMIT</button>
+
+      <button @click="testUpload">test</button>
     </div>
   </div>
 </template>
@@ -24,6 +26,7 @@
 import { mapFields } from "vuex-map-fields";
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
+import axios from "../api/axios-instance";
 export default {
   data() {
     return {
@@ -53,6 +56,19 @@ export default {
         this.profilePic = fileReader.result;
       });
       fileReader.readAsDataURL(event.target.files[0]);
+    },
+
+    testUpload() {
+      axios
+        .post("/main/upload", {
+          profilePic: this.profilePic,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   computed: {
