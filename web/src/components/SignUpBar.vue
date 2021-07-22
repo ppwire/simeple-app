@@ -1,24 +1,64 @@
 <template>
   <div class="form-card">
     <h2 class="text-white text-2xl mb-4 font-bold">Register</h2>
+
     <h3 class="input-text">User Name</h3>
     <InputText type="text" v-model="userName" />
+    <small class="text-red-500" v-if="v$.userName.$error">{{
+      v$.userName.$errors[0].$message
+    }}</small>
     <h3 class="input-text">Password</h3>
     <InputText type="text" v-model="password" />
+    <small class="text-red-500" v-if="v$.password.$error">{{
+      v$.password.$errors[0].$message
+    }}</small>
     <h3 class="input-text">Confirm Password</h3>
     <InputText type="text" v-model="confirmPassword" />
-    <button class="form-btn" @click="next">
-      <span class="font-bold"> NEXT STEP</span>
-    </button>
+    <small class="text-red-500" v-if="v$.confirmPassword.$error">{{
+      v$.confirmPassword.$errors[0].$message
+    }}</small>
+    <div class="flex flex-row justify-between">
+      <button class="form-btn">
+        <span class="font-bold" @click="back"> BACK </span>
+      </button>
+      <button class="form-btn" @click="next">
+        <span class="font-bold"> NEXT STEP</span>
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapFields } from "vuex-map-fields";
+import { useVuelidate } from "@vuelidate/core";
+import { required, sameAs } from "@vuelidate/validators";
+
 export default {
+  data() {
+    return {
+      v$: useVuelidate(),
+    };
+  },
+  validations() {
+    return {
+      userName: { required },
+      password: {
+        required,
+        sameAs: sameAs(this.confirmPassword),
+        minLength: 8,
+      },
+      confirmPassword: { required, sameAs: sameAs(this.password) },
+    };
+  },
   methods: {
+    back() {
+      this.$emit("back-to-login");
+    },
     next() {
-      this.$emit("next-step");
+      this.v$.$validate();
+      if (!this.v$.$error) {
+        this.$emit("next-step");
+      }
     },
   },
   computed: {

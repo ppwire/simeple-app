@@ -2,7 +2,9 @@
   <div class="form-card">
     <h3 class="input-text">Address</h3>
     <InputText v-model="address"></InputText>
-
+    <small class="text-red-500" v-if="v$.address.$error">{{
+      v$.address.$errors[0].$message
+    }}</small>
     <h3 class="input-text">Income</h3>
     <Dropdown
       v-model="income"
@@ -10,6 +12,9 @@
       optionLabel="incomeName"
       placeholder="Select an Income"
     />
+    <small class="text-red-500" v-if="v$.income.$error">{{
+      v$.income.$errors[0].$message
+    }}</small>
     <h3 class="input-text">Gender</h3>
     <Dropdown
       v-model="gender"
@@ -17,6 +22,9 @@
       optionLabel="value"
       placeholder="Select a Gender"
     ></Dropdown>
+    <small class="text-red-500" v-if="v$.gender.$error">{{
+      v$.gender.$errors[0].$message
+    }}</small>
 
     <h3 class="input-text">Province</h3>
     <Dropdown
@@ -28,7 +36,9 @@
       @change="getDistricts"
     >
     </Dropdown>
-
+    <small class="text-red-500" v-if="v$.province.$error">{{
+      v$.province.$errors[0].$message
+    }}</small>
     <h3 class="input-text">District</h3>
     <Dropdown
       v-model="district"
@@ -39,6 +49,9 @@
       @change="getSubDistricts"
     >
     </Dropdown>
+    <small class="text-red-500" v-if="v$.district.$error">{{
+      v$.district.$errors[0].$message
+    }}</small>
 
     <h3 class="input-text">SubDistrict</h3>
     <Dropdown
@@ -50,9 +63,15 @@
       @change="getZipCode"
     >
     </Dropdown>
+    <small class="text-red-500" v-if="v$.subDistrict.$error">{{
+      v$.subDistrict.$errors[0].$message
+    }}</small>
 
     <h3 class="input-text">Zip Code</h3>
     <InputText v-model="zipCode"> </InputText>
+    <small class="text-red-500" v-if="v$.zipCode.$error">{{
+      v$.zipCode.$errors[0].$message
+    }}</small>
     <div class="flex flex-row justify-between">
       <button class="form-btn">
         <span class="font-bold" @click="back"> BACK </span>
@@ -67,9 +86,12 @@
 <script>
 import { mapFields } from "vuex-map-fields";
 import api from "../api/data";
+import { useVuelidate } from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
 export default {
   data() {
     return {
+      v$: useVuelidate(),
       incomeList: [],
       provinceList: [],
       districtList: [],
@@ -90,12 +112,27 @@ export default {
       ],
     };
   },
+
+  validations() {
+    return {
+      income: { required },
+      gender: { required },
+      address: { required },
+      province: { required },
+      district: { required },
+      subDistrict: { required },
+      zipCode: { required },
+    };
+  },
   methods: {
     back() {
       this.$emit("back");
     },
     next() {
-      this.$emit("next-step");
+      this.v$.$validate();
+      if (!this.v$.$error) {
+        this.$emit("next-step");
+      }
     },
 
     getZipCode() {

@@ -1,6 +1,9 @@
 <template>
   <div class="form-card">
     <h3 class="input-text">Profile Image</h3>
+    <small class="text-red-500" v-if="v$.profilePic.$error"
+      >Please upload profile picture.</small
+    >
     <input
       type="file"
       class="input-text-field"
@@ -15,7 +18,7 @@
         <span class="font-bold" @click="back"> BACK </span>
       </button>
       <button class="form-btn">
-        <span class="font-bold"> SUBMIT</span>
+        <span class="font-bold" @click="submit"> SUBMIT</span>
       </button>
     </div>
   </div>
@@ -23,10 +26,30 @@
 
 <script>
 import { mapFields } from "vuex-map-fields";
+import { useVuelidate } from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
 export default {
+  data() {
+    return {
+      v$: useVuelidate(),
+    };
+  },
+
+  validations() {
+    return {
+      profilePic: { required },
+    };
+  },
+
   methods: {
     back() {
       this.$emit("back");
+    },
+    submit() {
+      this.v$.$validate();
+      if (!this.v$.$error) {
+        this.$emit("next-step");
+      }
     },
     handleFileUpload(event) {
       const fileReader = new FileReader();
