@@ -1,6 +1,6 @@
 <template>
   <div class="form-card">
-    <h3 class="font-bold text-white text-xl">
+    <h3 class="font-bold text-white text-xl text-center">
       Welcome {{ this.$store.state.signIn.name }}
     </h3>
     <button class="form-btn" @click="this.$emit('get-content')">
