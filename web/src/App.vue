@@ -40,6 +40,14 @@ html {
   @apply flex flex-col bg-main-blue p-8 rounded-xl;
 }
 
+.from-flex {
+  @apply flex bg-main-blue p-8 rounded-xl;
+}
+
+.img{
+  @apply object-contain max-h-60 max-w-xl mb-4
+}
+
 .form-btn {
   @apply bg-white text-main-blue rounded-lg p-2 my-2 mt-5 font-bold;
 }

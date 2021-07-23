@@ -34,5 +34,28 @@ export default {
             reject(err)
          })
       })
+   },
+   getUserData: (token) => {
+      const config = {
+         headers: {
+            Authorization: `Bearer ${token}`
+         }
+      }
+      return new Promise((resolve, reject) => {
+         axiosInstance.get('/main/user', config).then(res => {
+            resolve(res.data)
+         }).catch(err => {
+            reject(err)
+         })
+      })
+   },
+   getUser: (userName) => {
+      return new Promise((resolve, reject) => {
+         axiosInstance.get(`/user?userName=${userName}`).then(res => {
+            resolve(res.data)
+         }).catch(err => {
+            reject(err)
+         })
+      })
    }
 }

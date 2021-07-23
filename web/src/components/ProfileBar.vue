@@ -12,7 +12,7 @@
       accept="image/*"
     />
 
-    <img :src="profilePic" class="object-contain max-h-60 max-w-xl mb-4" />
+    <img :src="profilePic" class="img" />
     <div class="flex flex-row justify-between">
       <button class="form-btn" @click="back">BACK</button>
       <button class="form-btn" @click="submit">SUBMIT</button>

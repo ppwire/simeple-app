@@ -73,7 +73,7 @@
       v$.zipCode.$errors[0].$message
     }}</small>
     <div class="flex flex-row justify-between">
-      <button class="form-btn">BACK</button>
+      <button class="form-btn" @click="back">BACK</button>
       <button class="form-btn" @click="next">NEXT STEP</button>
     </div>
   </div>

@@ -40,6 +40,20 @@ export default createStore({
       state.signIn.userName = ''
       state.signIn.password = ''
       state.signIn.token = null
+    },
+    clearField(state) {
+      state.signUp.userName = ''
+      state.signUp.password = ''
+      state.signUp.confirmPassword = ''
+      state.information.address = ''
+      state.information.district = ''
+      state.information.gender = ''
+      state.information.income = ''
+      state.information.profilePic = ''
+      state.information.province = ''
+      state.information.district
+      state.information.subDistrict = ''
+      state.information.zipCode = ''
     }
   },
   getters: {
@@ -51,6 +65,12 @@ export default createStore({
     },
     userSignIn(context) {
       return userApi.userSignIn(context.state.signIn)
+    },
+    getUserContent(context) {
+      return userApi.getUserData(context.state.signIn.token)
+    },
+    getUserName(context) {
+      return userApi.getUser(context.state.signUp.userName)
     }
   },
   modules: {},

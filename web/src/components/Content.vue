@@ -1,22 +1,13 @@
 <template>
   <div class="form-card">
-    <h3 class="font-bold text-white text-xl">
-      Welcome {{ this.$store.state.signIn.name }}
-    </h3>
-    <button class="form-btn">VIEW CONTENT</button>
-    <button class="form-btn" @click="signOut">SIGN OUT</button>
+    <image class="img" :src="profilePic"></image>
+    <h1 class="input-text text-center text-xl">You are {{ name }}</h1>
+    <h1 class="input-text text-center text-xl">You gender is {{ gender }}</h1>
   </div>
 </template>
 
 <script>
-import router from "../router";
 export default {
-  setup() {},
-  methods: {
-    signOut() {
-      this.$store.commit("destroyToken");
-      router.push({ name: "Home" });
-    },
-  },
+  props: ["name", "gender", "profilePic"],
 };
 </script>

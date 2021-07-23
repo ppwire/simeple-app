@@ -7,7 +7,7 @@
     <InputText type="text" v-model="userName" />
     <h3 class="input-text">Password</h3>
     <InputText type="password" v-model="password" />
-    <Message severity="error" v-if="loginError"
+    <Message severity="error" v-if="loginError" :closable="false"
       >Incorrect username or password. Please Try again.
     </Message>
     <button class="form-btn" @click="signIn">SIGN IN</button>
@@ -28,16 +28,19 @@ export default {
   },
   methods: {
     registerLink() {
+      this.$store.commit("clearField");
       router.push({ name: "Register" });
     },
     signIn() {
       this.$store
         .dispatch("userSignIn")
         .then((res) => {
+          this.loginError = false;
           this.$store.commit("setToken", res.accessToken);
           router.push({ name: "Content" });
         })
         .catch((err) => {
+          this.loginError = true;
           console.log(err);
         });
     },
