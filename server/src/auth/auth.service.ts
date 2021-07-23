@@ -15,14 +15,18 @@ export class AuthService {
     const user = await this.userService.findByUserName(userName);
     if (user) {
       const compareResult = await this.utilService.compare(password, user.userPassword)
-      return compareResult
+      if (compareResult) {
+        return user
+      } else {
+        return null
+      }
     } else {
       return null
     }
   }
 
-  createJwtKey(userName: string) {
-    const payload = { sub: userName };
+  createJwtKey(userName: string, userId: number) {
+    const payload = { sub: userName, id: userId };
     return {
       accessToken: this.jwtService.sign(payload, {
         secret: process.env.SECRET_KEY,

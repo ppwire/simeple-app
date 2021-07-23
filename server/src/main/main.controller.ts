@@ -1,3 +1,4 @@
+import { Req } from '@nestjs/common';
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { UserDto } from 'src/dto/user.dto';
@@ -13,8 +14,8 @@ export class MainController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Post('')
-  getUserData() {
-    return 1
+  @Get('user')
+  getUserData(@Req() req: any) {
+    return this.mainService.getData(req.user.id)
   }
 }
