@@ -43,6 +43,7 @@ export default {
       this.$store
         .dispatch("userSignUp")
         .then(() => {
+          this.$store.commit("clearField");
           router.push({ name: "Complete" });
         })
         .catch((err) => {

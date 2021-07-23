@@ -22,6 +22,9 @@ body,
 html {
   height: 100%;
   width: 100%;
+  background-image: url("./assets/bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #app {
@@ -44,8 +47,8 @@ html {
   @apply flex bg-main-blue p-8 rounded-xl;
 }
 
-.img{
-  @apply object-contain max-h-60 max-w-xl mb-4
+.img {
+  @apply object-contain max-h-60 max-w-xl mb-4;
 }
 
 .form-btn {

@@ -14,7 +14,6 @@ export default {
             amphuresId: information.district.id,
             districtsId: information.subDistrict.id
          }).then(res => {
-            console.log(res)
             resolve(res.data)
          }).catch(err => {
             console.log(err)
@@ -28,7 +27,6 @@ export default {
             userName: signIn.userName,
             userPassword: signIn.password
          }).then(res => {
-            console.log(res)
             resolve(res.data)
          }).catch(err => {
             reject(err)

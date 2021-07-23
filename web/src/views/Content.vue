@@ -1,7 +1,12 @@
 <template>
   <div class="flex-col">
     <ContentBar @get-content="getContent" class="mb-5"></ContentBar>
-    <Content :name="name" :gender="gender" v-if="showContent"></Content>
+    <Content
+      :name="name"
+      :gender="gender"
+      :profilePic="profilePic"
+      v-if="showContent"
+    ></Content>
   </div>
 </template>
 
@@ -23,7 +28,6 @@ export default {
   },
   methods: {
     getContent() {
-      console.log("test");
       this.$store
         .dispatch("getUserContent")
         .then((res) => {
@@ -31,7 +35,6 @@ export default {
           this.gender = res.gender;
           this.profilePic = res.profilePic;
           this.showContent = true;
-          console.log(res);
         })
         .catch((err) => {
           console.log(err);

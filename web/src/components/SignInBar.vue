@@ -3,7 +3,7 @@
     <h1 class="text-2xl mb-2 text-center text-white font-main font-bold">
       Simple App
     </h1>
-    <h3 class="input-text">User Name</h3>
+    <h3 class="input-text">Username</h3>
     <InputText type="text" v-model="userName" />
     <h3 class="input-text">Password</h3>
     <InputText type="password" v-model="password" />

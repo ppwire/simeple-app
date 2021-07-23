@@ -1,7 +1,11 @@
 <template>
   <div class="form-card">
     <h3 class="input-text">Address</h3>
-    <InputText v-model="address"></InputText>
+    <InputText
+      v-model="address"
+      maxlength="30"
+      placeholder="MAX 30 CHARACTERS"
+    ></InputText>
     <small class="text-red-500" v-if="v$.address.$error">{{
       v$.address.$errors[0].$message
     }}</small>
