@@ -15,10 +15,12 @@ import { Amphures } from './entity/amphures.entity';
 import { DistrictsModule } from './districts/districts.module';
 import { Districts } from './entity/districts.entity';
 import { AuthModule } from './auth/auth.module';
+import { UtilModule } from './util/util.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
+      envFilePath: '.env.local',
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({
@@ -38,8 +40,9 @@ import { AuthModule } from './auth/auth.module';
     AmphuresModule,
     DistrictsModule,
     AuthModule,
+    UtilModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

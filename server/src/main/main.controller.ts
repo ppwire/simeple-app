@@ -4,8 +4,10 @@ import { MainService } from './main.service';
 
 @Controller('main')
 export class MainController {
-  constructor(private mainService: MainService) {}
+  constructor(private mainService: MainService) { }
 
   @Post('signin')
-  signin(@Body() userDto: UserDto) {}
+  signin(@Body() userDto: UserDto) {
+    return this.mainService.signIn(userDto)
+  }
 }

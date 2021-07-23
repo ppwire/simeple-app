@@ -1,16 +1,22 @@
+import { BadRequestException } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
+import { AuthService } from 'src/auth/auth.service';
+import { UserDto } from 'src/dto/user.dto';
+
 @Injectable()
 export class MainService {
 
-   hash(userPassword: string): Promise<string> {
-      const saltOrRounds = 10;
-      const password = userPassword;
-      const hash = bcrypt.hash(password, saltOrRounds);
-      return hash;
-   }
+   constructor(
+      private authService: AuthService
+   ) { }
 
-   compare(password: string, userPassword: string): Promise<Boolean> {
-      return bcrypt.compare(password, userPassword);
+   async signIn(userDto: UserDto) {
+      const validate = await this.authService.validate(userDto.userName, userDto.userPassword)
+      console.log(validate)
+      if (validate) {
+         return this.authService.createJwtKey(userDto.userName)
+      } else {
+         throw new BadRequestException()
+      }
    }
 }

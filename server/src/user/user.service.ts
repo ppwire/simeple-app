@@ -6,7 +6,7 @@ import { Districts } from 'src/entity/districts.entity';
 import { Income } from 'src/entity/income.entity';
 import { Provinces } from 'src/entity/provinces.entity';
 import { User } from 'src/entity/user.entity';
-import { MainService } from 'src/main/main.service';
+import { UtilService } from 'src/util/util.service';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-    private mainService: MainService,
+    private utilService: UtilService,
   ) { }
 
   find(userDto: UserDto): Promise<User[] | User> {
@@ -50,7 +50,7 @@ export class UserService {
     user.address = userDto.address;
     user.gender = userDto.gender;
 
-    await this.mainService.hash(userDto.userPassword).then((res) => {
+    await this.utilService.hash(userDto.userPassword).then((res) => {
       user.userPassword = res;
     });
 
