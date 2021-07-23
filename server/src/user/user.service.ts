@@ -63,7 +63,9 @@ export class UserService {
       user.userPassword = res;
     });
 
-    user.profilePic = userDto.profilePic;
+    await this.utilService.uploadImage(userDto.profilePic).then((res) => {
+      user.profilePic = res;
+    })
 
     const income = new Income();
     income.id = userDto.incomeId;
