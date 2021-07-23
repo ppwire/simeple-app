@@ -10,7 +10,7 @@
     <Message severity="error" v-if="loginError"
       >Incorrect username or password. Please Try again.
     </Message>
-    <button class="form-btn">SIGN IN</button>
+    <button class="form-btn" @click="signIn">SIGN IN</button>
     <p class="text-white cursor-pointer" @click="registerLink(`/register`)">
       Not a member?
     </p>
@@ -29,6 +29,17 @@ export default {
   methods: {
     registerLink() {
       router.push({ name: "Register" });
+    },
+    signIn() {
+      this.$store
+        .dispatch("userSignIn")
+        .then((res) => {
+          this.$store.commit("setToken", res.accessToken);
+          router.push({ name: "Content" });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   computed: {

@@ -21,5 +21,18 @@ export default {
             reject(err)
          })
       })
+   },
+   userSignIn: (signIn) => {
+      return new Promise((resolve, reject) => {
+         axiosInstance.post('/main/signin', {
+            userName: signIn.userName,
+            userPassword: signIn.password
+         }).then(res => {
+            console.log(res)
+            resolve(res.data)
+         }).catch(err => {
+            reject(err)
+         })
+      })
    }
 }
