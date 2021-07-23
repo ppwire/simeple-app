@@ -27,7 +27,7 @@ export class AuthService {
       accessToken: this.jwtService.sign(payload, {
         secret: process.env.SECRET_KEY,
         expiresIn: '1d'
-      }),
+      })
     };
   }
 }
