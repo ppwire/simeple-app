@@ -57,7 +57,7 @@
       v$.district.$errors[0].$message
     }}</small>
 
-    <h3 class="input-text">SubDistrict</h3>
+    <h3 class="input-text">Sub District</h3>
     <Dropdown
       v-model="subDistrict"
       :options="subDistrictList"

@@ -1,16 +1,22 @@
 <template>
   <div class="form-card">
-    <h3 class="input-text">Profile Image</h3>
+    <h3 class="input-text mb-2">Profile Image</h3>
     <small class="text-red-500" v-if="v$.profilePic.$error"
       >Please upload profile picture.</small
     >
-    <input
-      type="file"
-      class="input-text-field"
-      ref="file"
-      @change="handleFileUpload"
-      accept="image/*"
-    />
+
+    <label
+      class="text-main-blue font-bold font-xl p-10 bg-white rounded-lg mb-4 text-center"
+    >
+      Upload your Image
+      <input
+        type="file"
+        class="input-text-field"
+        ref="file"
+        @change="handleFileUpload"
+        accept="image/*"
+      />
+    </label>
 
     <img :src="profilePic" class="img" />
     <div class="flex flex-row justify-between">
@@ -60,3 +66,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+input[type="file"] {
+  display: none;
+}
+</style>
