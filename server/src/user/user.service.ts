@@ -26,6 +26,15 @@ export class UserService {
         },
         relations: ['income', 'provinces', 'amphures', 'districts'],
       });
+    else if (userDto.userName) {
+      return this.userRepository.findOne({
+        where: {
+          isDeleted: 0,
+          userName: userDto.userName,
+        },
+        relations: ['income', 'provinces', 'amphures', 'districts'],
+      });
+    }
     else
       return this.userRepository.find({
         where: {
