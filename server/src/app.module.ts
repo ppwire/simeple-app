@@ -20,7 +20,6 @@ import { UtilModule } from './util/util.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '.env.local',
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({

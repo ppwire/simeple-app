@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Income } from 'src/entity/income.entity';
+import { Income } from '../entity/income.entity';
 import { Repository, UpdateResult } from 'typeorm';
 import { IncomeDto } from '../dto/income.dto';
 

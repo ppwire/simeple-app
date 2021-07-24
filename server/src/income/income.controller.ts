@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Patch, Post, Query } from '@nestjs/common';
-import { IncomeDto } from 'src/dto/income.dto';
+import { IncomeDto } from '../dto/income.dto';
 import { IncomeService } from './income.service';
 
 @Controller('income')

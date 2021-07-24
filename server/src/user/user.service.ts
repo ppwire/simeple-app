@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserDto } from 'src/dto/user.dto';
-import { Amphures } from 'src/entity/amphures.entity';
-import { Districts } from 'src/entity/districts.entity';
-import { Income } from 'src/entity/income.entity';
-import { Provinces } from 'src/entity/provinces.entity';
-import { User } from 'src/entity/user.entity';
-import { UtilService } from 'src/util/util.service';
+import { UserDto } from '../dto/user.dto';
+import { Amphures } from '../entity/amphures.entity';
+import { Districts } from '../entity/districts.entity';
+import { Income } from '../entity/income.entity';
+import { Provinces } from '../entity/provinces.entity';
+import { User } from '../entity/user.entity';
+import { UtilService } from '../util/util.service';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -59,9 +59,7 @@ export class UserService {
     user.address = userDto.address;
     user.gender = userDto.gender;
 
-    await this.utilService.hash(userDto.userPassword).then((res) => {
-      user.userPassword = res;
-    });
+    user.userPassword = userDto.userPassword
 
     await this.utilService.uploadImage(userDto.profilePic).then((res) => {
       user.profilePic = res;

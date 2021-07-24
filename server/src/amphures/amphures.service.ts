@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Amphures } from 'src/entity/amphures.entity';
+import { Amphures } from '../entity/amphures.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()

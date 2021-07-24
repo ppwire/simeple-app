@@ -1,8 +1,8 @@
 import { BadRequestException } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
-import { AuthService } from 'src/auth/auth.service';
-import { UserDto } from 'src/dto/user.dto';
-import { UserService } from 'src/user/user.service';
+import { AuthService } from '../auth/auth.service';
+import { UserDto } from '../dto/user.dto';
+import { UserService } from '../user/user.service';
 
 
 @Injectable()
